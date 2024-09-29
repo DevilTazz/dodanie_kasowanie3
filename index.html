@@ -29,18 +29,7 @@
   padding-top: 15px;
 }
 
-#droppable > * {
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  border: 2px dashed #060;
-  position: absolute;
-  line-height: 70px;
-  font-size: 50px;
-  text-align: center;
-  text-decoration: line-through;
-}
+
     #droppable .list-group-item {
   background-color: #e0ffe0; /* Kolor tła dla elementów w strefie "droppable" */
   border: 1px solid #00a000;
@@ -53,8 +42,8 @@
 <body>
 
   
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+  <!-- Latest compiled and minified CSS 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/> -->
   
   
   
@@ -73,28 +62,25 @@
   </div>
 
 <script>
+ // Sortowanie elementów w strefie draggable
+    Sortable.create(draggable, {
+      group: {
+        name: "shared",
+        pull: true
+      },
+      sort: true // Włącz sortowanie w liście źródłowej
+    });
 
-Sortable.create(draggable, {
-  group: {
-    name: "shared",
-    pull: true
-  },
-  
-  sort: false
-});
+    // Sortowanie w strefie droppable
+    Sortable.create(droppable, {
+      group: "shared",
 
-
-Sortable.create(droppable, {
-  group: "shared",
-  
-  onAdd: function (evt) {
-    var el = evt.item;
-        console.log('Dropped: ' + el.textContent); // Zamiast alert, logowanie do konsoli
-        el.style.border = "2px solid green"; // Zmieniona stylizacja po upuszczeniu
+      onAdd: function (evt) {
+        var el = evt.item;
+        el.remove(); // Usunięcie elementu ze strefy docelowej
+        /* alert('Element został usunięty: ' + el.textContent); // Powiadomienie o usunięciu */
       }
-});
-
-
+    });
   </script>
   
 </body>
