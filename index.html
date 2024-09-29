@@ -89,9 +89,9 @@ Sortable.create(droppable, {
   
   onAdd: function (evt) {
     var el = evt.item;
-    el.parentNode.removeChild(el);
-    alert('Dropped: ' + el.textContent);
-  }
+        console.log('Dropped: ' + el.textContent); // Zamiast alert, logowanie do konsoli
+        el.style.border = "2px solid green"; // Zmieniona stylizacja po upuszczeniu
+      }
 });
 
 
