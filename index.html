@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Bin</title>
+  <style>
+  body {
+  padding: 20px;
+}
+
+.list-group-item {
+  cursor: move;
+  cursor: -webkit-grabbing;
+}
+
+#droppable {
+  border: 2px dashed #f60;
+  min-height: 100px;
+  position: relative;
+}
+
+#droppable::before {
+  color: #ccc;
+  font-size: 40px;
+  content: 'Drop zone';
+  display: block;
+  text-align: center;
+  padding-top: 15px;
+}
+
+#droppable > * {
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 2px dashed #060;
+  position: absolute;
+  line-height: 70px;
+  font-size: 50px;
+  text-align: center;
+  text-decoration: line-through;
+}
+    #droppable .list-group-item {
+  background-color: #e0ffe0; /* Kolor tła dla elementów w strefie "droppable" */
+  border: 1px solid #00a000;
+}
+
+     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+  
+</head>
+<body>
+
+  
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+  
+  
+  
+  
+  
+  <!-- draggable -->
+  <div id="draggable" class="list-group">
+    <div class="list-group-item">foo</div>
+    <div class="list-group-item">bar</div>
+    <div class="list-group-item">baz</div>
+  </div>
+  
+  
+  <!-- droppable -->
+  <div id="droppable" class="list-group">
+  </div>
+
+<script>
+
+Sortable.create(draggable, {
+  group: {
+    name: "shared",
+    pull: true
+  },
+  
+  sort: false
+});
+
+
+Sortable.create(droppable, {
+  group: "shared",
+  
+  onAdd: function (evt) {
+    var el = evt.item;
+    el.parentNode.removeChild(el);
+    alert('Dropped: ' + el.textContent);
+  }
+});
+
+
+  </script>
+  
+</body>
+</html>
